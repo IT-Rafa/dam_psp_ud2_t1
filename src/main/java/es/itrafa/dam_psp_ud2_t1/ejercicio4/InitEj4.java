@@ -5,6 +5,11 @@
 package es.itrafa.dam_psp_ud2_t1.ejercicio4;
 
 /**
+ * Inicia ejercicio 4
+ *
+ * Enunciado Ejercicio 4: CAJERO AUTOMATICO Diseña un programa que simule la
+ * gestión de un punto de venta con tres terminales que acceden a un objeto
+ * Cajero que mantiene la cuenta de las localidades vendidas.
  *
  * @author it-ra
  */
@@ -16,5 +21,5 @@ public class InitEj4 {
     public static void main(String[] args) {
         // TODO code application logic here
     }
-    
+
 }

@@ -29,24 +29,40 @@ public class InitEj1 {
      */
     public static void main(String[] args) {
         LOG.info("Inicio Ejercicio 1");
-        try {
-            // create a synchronized list
-            List<Integer> synlist = Collections
-                    .synchronizedList(list);
+
+        final List<Integer> syncList = Collections.synchronizedList(new ArrayList<>());
+
+        Thread h1 = new Thread(() -> {
+            synchronized (syncList) {
+                for (int i = 0; i < 10; i++) {
+                    String msg = String.format("Añadiendo %d%n", i);
+                    LOG.info(msg);
+                    syncList.add(i);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        LOG.severe("Thread h1 was innterrupted");
+                    }
+                }
+            }
+        });
 
 
-            // populate the list
-            Hilo1 h1 = new Hilo1();
-            Hilo2 h2 = new Hilo2();
-            // printing the Collection
-            System.out.println("List : " + list);
-
-
-            // printing the Collection
-            System.out.println("Synchronized list is : " + synlist);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Exception thrown : " + e);
-        }
-
+        Thread h2 = new Thread(() -> {
+            synchronized (syncList) {
+                for (int i = 10; i < 20; i++) {
+                    String msg = String.format("Añadiendo %d%n", i);
+                    LOG.info(msg);
+                    syncList.add(i);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        LOG.severe("Thread h2 was innterrupted");
+                    }
+                }
+            }
+        });
+        h1.start();
+        h2.start();
     }
 }
